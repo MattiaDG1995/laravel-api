@@ -1,0 +1,34 @@
+@extends('layouts.dashboard')
+@section('content')
+
+<div class="text-center">
+    <h1>crea post</h1> 
+</div>
+
+<form action="{{route('admin.posts.store')}}" method="POST">
+@csrf
+<div class="my-4">
+    <label for="" class="form-label">Titolo</label>
+    <input value="{{$post->title}}" type="text" class="form-control @error( 'title' )is invalid @enderror"  name="title">
+    @error('title')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+    @enderror
+</div>
+
+<div>
+    <label for="" class="form-label">Body</label>
+    <textarea class="form-control @error( 'title' )is invalid @enderror" name="body">{{$post->body}}</textarea>
+    @error('body')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+    @enderror
+</div>
+
+<button type="submit" class="btn btn-primary">Crea</button>
+
+</form>
+
+@endsection

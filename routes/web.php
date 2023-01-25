@@ -30,8 +30,7 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function(){
         Route::get('/', 'HomeController@index')->name('index');
-        
-        Route::resource('/posts', PostController::class);
+        Route::resource('/posts', PostsController::class);
 });
 
 
