@@ -28,6 +28,16 @@
     @enderror
 </div>
 
+<div class="my-4">
+    <label for="">Categories</label>
+    <select class="form-control" name="category_id" id="">
+    <option value="">Seleziona categoria</option>
+    @foreach($categories as $category)
+        <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
+    @endforeach
+    </select>
+</div>
+
 <button type="submit" class="btn btn-primary">Crea</button>
 
 </form>

@@ -7,6 +7,7 @@
       <th scope="col">#id</th>
       <th scope="col">title</th>
       <th scope="col">body</th>
+      <th scope="col">categories</th>
       <th scope="col">actions</th>
     </tr>
   </thead>
@@ -19,6 +20,11 @@
         <a href="{{route('admin.posts.show', $post->id)}}">{{$post->title}}</a>
       </td>
       <td>{{$post->body}}</td>
+      <td>
+        @if($post->category)
+          {{$post->category['name']}}
+        @endif
+      </td>
       <td>
         <a href="{{route('admin.posts.edit', $post->id)}}">Edit</a>
         <form method="POST" action="{{route('admin.posts.destroy', $post->id)}}">
