@@ -5,7 +5,7 @@
     <h1>crea post</h1> 
 </div>
 
-<form action="{{route('admin.posts.store')}}" method="POST">
+<form action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
 <div class="my-4">
     <label for="" class="form-label">Titolo</label>
@@ -45,6 +45,11 @@
             {{$tag->name}}
         </label>
     @endforeach
+</div>
+
+<div class="my-4">
+    <label for="">Aggiunta img</label>
+    <input type="file" name="image" class="form-control-file">
 </div>
 
 <button type="submit" class="btn btn-primary">Crea</button>
