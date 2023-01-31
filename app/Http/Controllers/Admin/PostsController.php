@@ -6,6 +6,7 @@ use App\Post;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -51,6 +52,11 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
         $newPost = new Post();
+
+        if(array_key_exists('image', $data)){
+            $cover_url = Storage::put('post_covers', $data['image']);
+            $data['cover'] = $cover_url;
+        }
         $newPost->fill($data);
         $newPost->save();
 
@@ -119,6 +125,9 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $singoloPost = Post::findOrFail($id);
+        if($singoloPost->cover){
+            Storage::delete($singoloPost->cover);
+        }
         $singoloPost->tags()->sync([]);
         $singoloPost->delete();
         return redirect()->route('admin.posts.index');
